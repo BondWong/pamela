@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:neo4j="http://www.springframework.org/schema/data/neo4j"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util-4.1.xsd
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/data/neo4j
+http://www.springframework.org/schema/data/neo4j/spring-neo4j.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<util:map id="config">
+		<!-- <entry key="allow_store_upgrade" value="true" /> -->
+	</util:map>
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.bond.pamela.service" />
+
+	<bean id="graphDbFactory" class="org.neo4j.graphdb.factory.GraphDatabaseFactory" />
+	<bean id="graphDbBuilder" factory-bean="graphDbFactory"
+		factory-method="newEmbeddedDatabaseBuilder">
+		<constructor-arg value="target/data/pamela.db" />
+	</bean>
+	<bean id="graphDbBuilderFinal" factory-bean="graphDbBuilder"
+		factory-method="setConfig">
+		<constructor-arg ref="config" />
+	</bean>
+	<bean id="graphDatabaseService" factory-bean="graphDbBuilderFinal"
+		factory-method="newGraphDatabase" destroy-method="shutdown" scope="singleton" />
+
+	<neo4j:config graphDatabaseService="graphDatabaseService"
+		base-package="com.bond.pamela.domain" />
+
+	<neo4j:repositories base-package="com.bond.pamela.persistence" />
+
+	<!-- <tx:annotation-driven mode="aspectj" /> -->
+
+	<bean id="conversionService"
+		class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<bean
+					class="com.bond.pamela.domain.valueObject.converter.ImageToJsonConverter" />
+				<bean
+					class="com.bond.pamela.domain.valueObject.converter.JsonToImageConverter" />
+			</set>
+		</property>
+	</bean>
+
+</beans>
