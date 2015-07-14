@@ -1,5 +1,41 @@
 (function($) {
 	"use strict";
+
+	// fetch category start
+
+	$
+			.ajax({
+				url : "pamela/mood/all",
+				type : "GET",
+				dataType : "json",
+				cache : true,
+				async : false,
+				success : function(data, textStatus, jqXHR) {
+					// success message
+					if (data.length != 0) {
+						var allItem = '<li><a href="diary.jsp?category=all"><span id="category_all">ALL</span></a></li>';
+						$("#mood_category").append(allItem);
+					}
+
+					$(data).each(
+							function(index, element) {
+								var item = '<li><a href="diary.jsp?category='
+										+ element + '"><span id="category_'
+										+ element + '">'
+										+ element.toUpperCase()
+										+ '<span></a></li>';
+								$("#mood_category").append(item);
+							});
+				},
+				error : function(jqXHR, textStatus, error) {
+					// fail message
+					alert(textStatus);
+				}
+
+			});
+
+	// fetch category end
+
 	$(document)
 			.ready(
 					function() {
@@ -314,38 +350,39 @@
 
 						$('.popovers').popover();
 
+						// locate active navigation item start
+
+						var url = window.location.href;
+						if (url.contains("diary.jsp")) {
+							alert("#category_" + $.url().param("category"));
+							sessionStorage.setItem("diary_active", $.url()
+									.param("category"));
+							$("#diary_tools").css("display", "block");
+							$("#mood_category").css("display", "block");
+							$("#diary_parent").addClass("active");
+							$("#category_parent").addClass("active");
+							$("#category_" + $.url().param("category"))
+									.addClass("active");
+						} else if (url.contains("diary_compose.jsp")) {
+							$("#diary_tools").css("display", "block");
+							$("#diary_parent").addClass("active");
+							$("#nav_diary_compose").addClass("active");
+						} else if (url.contains("diary_view.jsp")) {
+							var category = sessionStorage
+									.getItem("diary_active");
+							$("#diary_tools").css("display", "block");
+							$("#mood_category").css("display", "block");
+							$("#diary_parent").addClass("active");
+							$("#category_parent").addClass("active");
+							$("#category_" + $.url().param("category"))
+									.addClass("active");
+						} else if (url.contains("index.jsp")) {
+							$("#nav_index").addClass("active");
+						} else if (url.contains("gallery.jsp")) {
+							$("#nav_gallery").addClass("active");
+						}
+
+						// locate active navigation item end
+
 					});
-	// fetch category start
-
-	$
-			.ajax({
-				url : "pamela/mood/all",
-				type : "GET",
-				dataType : "json",
-				cache : true,
-				async : false,
-				success : function(data, textStatus, jqXHR) {
-					// success message
-					if (data.length != 0) {
-						var allItem = '<li><a href="diary.jsp?category=all">ALL</a></li>';
-						$("#mood_category").append(allItem);
-					}
-
-					$(data).each(
-							function(index, element) {
-								var item = '<li><a href="diary.jsp?category='
-										+ element + '">'
-										+ element.toUpperCase() + '</a></li>';
-								$("#mood_category").append(item);
-							});
-				},
-				error : function(jqXHR, textStatus, error) {
-					// fail message
-					alert(textStatus);
-				}
-
-			});
-
-	// fetch category end
-
 })(jQuery);

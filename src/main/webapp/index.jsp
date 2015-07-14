@@ -1,5 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%
+	Date today = new Date();
+	int day = today.getDay();
+	int month = today.getMonth();
+	int year = today.getYear();
+	request.setAttribute("year", 115 + 1900 + "");
+	int date = today.getDate();
+	request.setAttribute("date", date);
+
+	switch (day) {
+		case 0 :
+			request.setAttribute("day", "Monday");
+			break;
+		case 1 :
+			request.setAttribute("day", "Tuesday");
+			break;
+		case 2 :
+			request.setAttribute("day", "Wednesday");
+			break;
+		case 3 :
+			request.setAttribute("day", "Thursday");
+			break;
+		case 4 :
+			request.setAttribute("day", "Friday");
+			break;
+		case 5 :
+			request.setAttribute("day", "Saturday");
+			break;
+		case 6 :
+			request.setAttribute("day", "Sunday");
+			break;
+		default :
+	}
+
+	switch (month) {
+		case 0 :
+			request.setAttribute("month", "January");
+			break;
+		case 1 :
+			request.setAttribute("month", "February");
+			break;
+		case 2 :
+			request.setAttribute("month", "March");
+			break;
+		case 3 :
+			request.setAttribute("month", "April");
+			break;
+		case 4 :
+			request.setAttribute("month", "May");
+			break;
+		case 5 :
+			request.setAttribute("month", "June");
+			break;
+		case 6 :
+			request.setAttribute("month", "July");
+			break;
+		case 7 :
+			request.setAttribute("month", "August");
+			break;
+		case 8 :
+			request.setAttribute("month", "September");
+			break;
+		case 9 :
+			request.setAttribute("month", "October");
+			break;
+		case 10 :
+			request.setAttribute("month", "November");
+			break;
+		case 11 :
+			request.setAttribute("month", "December");
+			break;
+		default :
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +116,8 @@
 							</div>
 							<div class="col-lg-5 event-list-block">
 								<div class="cal-day">
-									<span>Today</span> Friday
+									<span>Today</span>
+									<c:out value="${requestScope.day }" />
 								</div>
 								<ul class="event-list">
 									<li>Will you miss me like I am miss you? <!-- <a
@@ -92,7 +168,7 @@
 					<div class="col-md-8">
 						<section class="panel">
 							<div class="wdgt-row">
-								<img src="images/weather_image.jpg" height="243" alt="">
+								<img src="images/philadelphia-morning.jpg" height="243" alt="">
 								<div class="wdt-head">weather forecast</div>
 								<!-- <div class="country-select">
 									<select class="styled">
@@ -106,40 +182,50 @@
 							</div>
 
 							<div class="panel-body">
-								<div class="row weather-full-info">
-									<div class="col-md-3 today-status">
+								<div class="row weather-full-info" id="weather_forecast">
+									<!-- <div class="col-md-3 today-status">
 										<h1>Today</h1>
-										<i class=" ico-cloudy "></i>
+										<i class=" ico-cloudy " id="forecast_weather_today"></i>
 										<div class="degree">37</div>
 									</div>
-									<div class="col-md-9">
-										<ul>
+									<div class="col-md-2 today-status">
+										<h1>Today</h1>
+										<i class=" ico-cloudy " id="forecast_weather_today"></i>
+										<div class="degree">37</div>
+									</div>
+									<div class="col-md-2 today-status">
+										<h1>Today</h1>
+										<i class=" ico-cloudy " id="forecast_weather_today"></i>
+										<div class="degree">37</div>
+									</div>
+									<div class="col-md-2 today-status">
+										<h1>Today</h1>
+										<i class=" ico-cloudy " id="forecast_weather_today"></i>
+										<div class="degree">37</div>
+									</div>
+									<div class="col-md-2 today-status">
+										<h1>Today</h1>
+										<i class=" ico-cloudy " id="forecast_weather_today"></i>
+										<div class="degree">37</div>
+									</div> -->
+									<!-- <ul>
 											<li>
-												<h2>Tomorrow</h2> <i class=" ico-cloudy text-primary"></i>
+												<h2>Tomorrow</h2> <i class=" ico-cloudy"></i>
 												<div class="statistics">32</div>
 											</li>
 											<li>
-												<h2>Mon</h2> <i class=" ico-rainy2 text-danger"></i>
+												<h2>Mon</h2> <i class=" ico-rainy2"></i>
 												<div class="statistics">40</div>
 											</li>
 											<li>
-												<h2>Tue</h2> <i class=" ico-lightning3 text-info"></i>
+												<h2>Tue</h2> <i class=" ico-lightning3"></i>
 												<div class="statistics">25</div>
 											</li>
 											<li>
-												<h2>Wed</h2> <i class=" ico-sun3 text-success"></i>
+												<h2>Wed</h2> <i class=" ico-sun3"></i>
 												<div class="statistics">37</div>
 											</li>
-											<li>
-												<h2>Thu</h2> <i class=" ico-snowy3 text-warning"></i>
-												<div class="statistics">15</div>
-											</li>
-											<li>
-												<h2>Fri</h2> <i class=" ico-cloudy "></i>
-												<div class="statistics">21</div>
-											</li>
-										</ul>
-									</div>
+										</ul> -->
 								</div>
 							</div>
 
@@ -149,9 +235,16 @@
 						<div class="profile-nav alt">
 							<section class="panel">
 								<div class="user-heading alt clock-row terques-bg">
-									<h1>December 14</h1>
-									<p class="text-left">2014, Friday</p>
-									<p class="text-left">7:53 PM</p>
+									<h1>
+										<c:out value="${requestScope.month }" />
+										<c:out value=" " />
+										<c:out value="${requestScope.date }" />
+									</h1>
+									<p class="text-left">
+										<c:out value="${requestScope.year }" />
+										,
+										<c:out value="${requestScope.day }" />
+									</p>
 								</div>
 								<ul id="clock">
 									<li id="sec"></li>
@@ -245,6 +338,7 @@
 	<!--Core js-->
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+	<script src="js/purl.js"></script>
 	<script src="bs3/js/bootstrap.min.js"></script>
 	<script src="js/jquery.dcjqaccordion.2.7.js"></script>
 	<script src="js/jquery.scrollTo.min.js"></script>
@@ -272,5 +366,68 @@
 	<!--common script init for all pages-->
 	<script src="js/scripts.js"></script>
 	<!--script for this page-->
+
+	<script>
+		$.ajax({
+			url : "pamela/mood/latest",
+			type : "GET",
+			dataType : "json",
+			cache : true,
+			async : false,
+			success : function(data, textStatus, jqXHR) {
+				// success message
+				$("#lastest_mood").empty().append(data.toUpperCase());
+			},
+			error : function(jqXHR, textStatus, error) {
+				// fail message
+				alert(textStatus);
+			}
+		});
+
+		var callbackFunction = function(data) {
+			var weather = "";
+			$(data.query.results.channel.item.forecast).each(
+					function(index, element) {
+						if (index == 0) {
+							weather = '<div class="col-md-3 today-status">'
+									+ '<h1>Today</h1>'
+									+ '<h5>'
+									+ element["text"]
+									+ '</h5>'
+									+ '<div class="degree">'
+									+ parseInt((parseInt(element["high"])
+											+ parseInt(element["low"]) - 32)
+											/ (2 * 1.8)) + '</div>' + '</div>';
+						} else if (index == 1) {
+							weather = '<div class="col-md-2 today-status">'
+									+ '<h1>Tomorrow</h1>'
+									+ '<h5>'
+									+ element["text"]
+									+ '</h5>'
+									+ '<div class="degree">'
+									+ parseInt((parseInt(element["high"])
+											+ parseInt(element["low"]) - 32)
+											/ (2 * 1.8)) + '</div>' + '</div>';
+						} else {
+							weather = '<div class="col-md-2 today-status">'
+									+ '<h1>'
+									+ element["day"]
+									+ '</h1>'
+									+ '<h5>'
+									+ element["text"]
+									+ '</h5>'
+									+ '<div class="degree">'
+									+ parseInt((parseInt(element["high"])
+											+ parseInt(element["low"]) - 32)
+											/ (2 * 1.8)) + '</div>' + '</div>';
+						}
+						$("#weather_forecast").append(weather);
+					});
+		};
+	</script>
+
+	<script
+		src="https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='philadelphia, pa')&format=json&callback=callbackFunction"></script>
+
 </body>
 </html>

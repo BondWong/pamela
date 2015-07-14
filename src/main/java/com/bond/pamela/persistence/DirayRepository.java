@@ -18,5 +18,8 @@ public interface DirayRepository extends GraphRepository<Diary> {
 
 	@Query("match (d: Diary) with d, count(d.images) as numberOfImagePerDiary return sum(numberOfImagePerDiary)")
 	Long countImages();
+
+	@Query("match (d: Diary) return d.mood order by d.id desc limit 1")
+	String getLatestMood();
 }
 // 218.244.137.34

@@ -290,6 +290,10 @@ ul.sidebar-menu li ul.sub li a:hover,ul.sidebar-menu li ul.sub li.active a
 	background: #202025;
 }
 
+li span.active {
+	color: #1fb5ad;
+}
+
 ul.sidebar-menu li {
 	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }

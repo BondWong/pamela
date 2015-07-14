@@ -229,6 +229,7 @@
 
 	<!--Core js-->
 	<script src="js/jquery.js"></script>
+	<script src="js/purl.js"></script>
 	<!--for $.broswer-->
 	<script src="js/jquery-1.8.3.min.js"></script>
 	<script src="bs3/js/bootstrap.min.js"></script>

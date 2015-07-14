@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 import com.bond.pamela.persistence.DirayRepository;
 import com.bond.pamela.persistence.result.Moods;
 import com.bond.pamela.service.parameterBean.MoodParamBean;
+import com.bond.pamela.utils.JsonHelper;
 
 @Component
 @Path("/mood")
@@ -46,6 +47,16 @@ public class MoodService {
 		}
 	}
 
+	@Path("/latest")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLatestMood() {
+		try (Transaction tx = db.beginTx()) {
+			String mood = repository.getLatestMood();
+			return Response.ok(JsonHelper.toJson(mood)).build();
+		}
+	}
+
 	@Path("/statistic")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -62,7 +73,6 @@ public class MoodService {
 		List<Map<String, Object>> results = Lists
 				.newArrayList(resourceIterator);
 		Map<String, Double> statistic = new HashMap<>();
-		System.out.println(results);
 		Double total = (long) results.get(0).get("count") * 1.0;
 		for (Map<String, Object> result : results) {
 			statistic.put(((String) result.get("type")),
