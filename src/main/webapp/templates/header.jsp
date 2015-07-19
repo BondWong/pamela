@@ -25,7 +25,8 @@
 						Name </span> <b class="caret"></b>
 			</a>
 				<ul class="dropdown-menu extended logout">
-					<li><a href="login.jsp"><i class="fa fa-key"></i> Log Out</a></li>
+					<li><a href="javascript:void(0)" id="logout_button"><i
+							class="fa fa-key"></i> Log Out</a></li>
 				</ul></li>
 			<!-- user login dropdown end -->
 		</ul>

@@ -384,5 +384,23 @@
 
 						// locate active navigation item end
 
+						$("#logout_button").click(function() {
+							$.ajax({
+								url : "pamela/account/logout",
+								type : "POST",
+								cache : true,
+								async : false,
+								success : function(data, textStatus, jqXHR) {
+									// success message
+									window.location.href = "/login.jsp";
+
+								},
+								error : function(jqXHR, textStatus, error) {
+									// fail message
+									alert(textStatus);
+								}
+							});
+						});
+
 					});
 })(jQuery);

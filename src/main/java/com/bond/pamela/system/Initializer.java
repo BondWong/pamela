@@ -10,6 +10,7 @@ import com.bond.pamela.utils.RootPathUtil;
  * 
  */
 public class Initializer implements ServletContextListener {
+
 	/**
 	 * Default constructor.
 	 */

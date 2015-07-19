@@ -9,6 +9,8 @@ import javax.ws.rs.core.Application;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
+import com.bond.pamela.security.AccountService;
+
 @ApplicationPath("/pamela")
 public class Pamela extends Application {
 	public Set<Class<?>> getClasses() {
@@ -16,6 +18,7 @@ public class Pamela extends Application {
 		classes.add(DiaryService.class);
 		classes.add(MoodService.class);
 		classes.add(ImageService.class);
+		classes.add(AccountService.class);
 		classes.add(JacksonFeature.class);
 		classes.add(MultiPartFeature.class);
 
