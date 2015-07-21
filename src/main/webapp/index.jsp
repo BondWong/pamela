@@ -376,15 +376,15 @@
 			async : false,
 			success : function(data, textStatus, jqXHR) {
 				// success message
-				$("#lastest_mood").empty().append(data.toUpperCase());
+				if (data != null && data.length > 1)
+					$("#lastest_mood").empty().append(data.toUpperCase());
 			},
 			error : function(jqXHR, textStatus, error) {
 				// fail message
-				alert(textStatus);
 			}
 		});
 
-		var callbackFunction = function(data) {
+		var showWeather = function(data) {
 			var weather = "";
 			$(data.query.results.channel.item.forecast).each(
 					function(index, element) {
@@ -427,7 +427,7 @@
 	</script>
 
 	<script
-		src="https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='philadelphia, pa')&format=json&callback=callbackFunction"></script>
+		src="https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='philadelphia, pa')&format=json&callback=showWeather"></script>
 
 </body>
 </html>

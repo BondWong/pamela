@@ -88,7 +88,9 @@
 
 	<script src="js/jquery.isotope.js"></script>
 	<script src="js/jquery.lighterbox.js"></script>
-
+	
+	<!--Theme Switcher-->
+	<script src="js/theme-switcher.js"></script>
 
 	<!--common script init for all pages-->
 	<script src="js/scripts.js"></script>
@@ -136,7 +138,7 @@
 					},
 					error : function(jqXHR, textStatus, error) {
 						// fail message
-						alert(textStatus);
+						console.log(error);
 					}
 				});
 
@@ -155,7 +157,7 @@
 				},
 				error : function(jqXHR, textStatus, error) {
 					// fail message
-					alert(textStatus);
+					console.log(error);
 				}
 			});
 		} else {

@@ -11,6 +11,7 @@ public class User extends Domain {
 	@Indexed(unique = true)
 	private String name;
 	private String password;
+	private String theme;
 
 	public String getName() {
 		return name;
@@ -26,6 +27,14 @@ public class User extends Domain {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getTheme() {
+		return this.theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
 	}
 
 	@Override
@@ -50,6 +59,7 @@ public class User extends Domain {
 		rep.put("id", this.id);
 		rep.put("name", this.name);
 		rep.put("password", this.password);
+		rep.put("theme", this.theme);
 		return rep;
 	}
 

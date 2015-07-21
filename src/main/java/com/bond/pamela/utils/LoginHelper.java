@@ -15,6 +15,10 @@ public class LoginHelper {
 	}
 
 	public static boolean contains(String sessionID) {
-		return userIDs.containsKey(sessionID);
+		return userIDs.containsKey(sessionID) && userIDs.get(sessionID) != null;
+	}
+
+	public static String getID(String sessionID) {
+		return userIDs.get(sessionID);
 	}
 }

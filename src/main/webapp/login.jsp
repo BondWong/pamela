@@ -122,7 +122,7 @@
 				},
 				error : function(jqXHR, textStatus, error) {
 					// fail message
-					alert(error);
+					console.log(error);
 				}
 
 			});

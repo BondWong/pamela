@@ -139,13 +139,13 @@ $.ajax({
 			},
 			error : function(jqXHR, textStatus, error) {
 				// fail message
-				alert(textStatus);
+				console.log(error);
 			}
 		});
 	},
 	error : function(jqXHR, textStatus, error) {
 		// fail message
-		alert(textStatus);
+		console.log(error);
 	}
 });
 

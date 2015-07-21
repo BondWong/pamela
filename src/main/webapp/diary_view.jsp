@@ -104,6 +104,8 @@
 	<script src="js/jquery.scrollTo.min.js"></script>
 	<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 	<script src="js/jquery.nicescroll.js"></script>
+	<!--Theme Switcher-->
+	<script src="js/theme-switcher.js"></script>
 	<!--Easy Pie Chart-->
 	<script src="js/easypiechart/jquery.easypiechart.js"></script>
 	<!--Sparkline Chart-->
@@ -179,7 +181,7 @@
 					},
 					error : function(jqXHR, textStatus, error) {
 						// fail message
-						alert(textStatus);
+						console.log(error);
 					}
 
 				});
@@ -194,7 +196,7 @@
 					window.location.href = "diary_compose.jsp";
 				},
 				error : function(jqXHR, textStatus, error) {
-					alert(textStatus);
+					console.log(error);
 				}
 			});
 		});

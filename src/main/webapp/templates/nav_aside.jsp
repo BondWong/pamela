@@ -7,7 +7,7 @@
 		<div class="leftside-navigation">
 			<ul class="sidebar-menu" id="nav-accordion">
 				<li><a href="index.jsp" id="nav_index"> <i
-						class="fa fa-dashboard"></i> <span>His Status</span>
+						class="fa fa-dashboard"></i> <span>Beloved One Status</span>
 				</a></li>
 				<li class="sub-menu"><a href="javascript:;" id="diary_parent">
 						<i class="fa fa-file-text"></i> <span>Diary </span>

@@ -45,7 +45,9 @@ public class AutoLoginFilter implements Filter {
 		HttpSession session = httpRequest.getSession();
 		Cookie[] cookies = httpRequest.getCookies();
 		for (int i = 0; cookies != null && i < cookies.length; i++)
-			if (cookies[i].getName().equals("PPAL"))
+			if (cookies[i].getName().equals("PPAL")
+					&& cookies[i].getValue() != null
+					&& AutoLoginHelper.autoLogin(cookies[i].getValue()) != null)
 				LoginHelper.addID(session.getId(),
 						AutoLoginHelper.autoLogin(cookies[i].getValue()));
 		// pass the request along the filter chain

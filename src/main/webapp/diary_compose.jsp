@@ -239,6 +239,9 @@
 	<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 	<script src="js/jquery.nicescroll.js"></script>
 
+	<!--Theme Switcher-->
+	<script src="js/theme-switcher.js"></script>
+
 	<!--Wysiwyg html5-->
 	<script type="text/javascript"
 		src="js/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>

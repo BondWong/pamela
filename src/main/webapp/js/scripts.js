@@ -29,7 +29,7 @@
 				},
 				error : function(jqXHR, textStatus, error) {
 					// fail message
-					alert(textStatus);
+					console.log(error);
 				}
 
 			});
@@ -354,7 +354,6 @@
 
 						var url = window.location.href;
 						if (url.contains("diary.jsp")) {
-							alert("#category_" + $.url().param("category"));
 							sessionStorage.setItem("diary_active", $.url()
 									.param("category"));
 							$("#diary_tools").css("display", "block");
@@ -397,7 +396,7 @@
 								},
 								error : function(jqXHR, textStatus, error) {
 									// fail message
-									alert(textStatus);
+									console.log(error);
 								}
 							});
 						});

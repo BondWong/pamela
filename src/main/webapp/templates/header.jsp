@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.bond.pamela.utils.LoginHelper"%>
 <header class="header fixed-top clearfix">
 	<!--logo start-->
 	<div class="brand">
@@ -21,8 +22,9 @@
 			<!-- user login dropdown start-->
 			<li class="dropdown"><a data-toggle="dropdown"
 				class="dropdown-toggle" href="#"> <img alt=""
-					src="images/avatar1_small.jpg"> <span class="username">User
-						Name </span> <b class="caret"></b>
+					src="images/<%=LoginHelper.getID(session.getId())%>.jpg"> <span
+					class="username"> <%=LoginHelper.getID(session.getId())%>
+				</span> <b class="caret"></b>
 			</a>
 				<ul class="dropdown-menu extended logout">
 					<li><a href="javascript:void(0)" id="logout_button"><i
