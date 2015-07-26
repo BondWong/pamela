@@ -288,7 +288,6 @@
 				"title" : title,
 				"htmlContent" : htmlContent
 			};
-
 			if (data.title == "") {
 				warn_title();
 			} else if (data.html == "") {

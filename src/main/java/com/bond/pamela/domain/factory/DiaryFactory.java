@@ -118,7 +118,7 @@ public class DiaryFactory implements DomainFactory {
 				ImageIO.write(thumbnail, mine, imageThumbnailFile);
 
 				Image thumbnailImage = new Image(thumbnail.getWidth(),
-						thumbnail.getWidth(), "thumbnail-" + imageName,
+						thumbnail.getHeight(), "thumbnail-" + imageName,
 						imageName);
 
 				images.add(image);

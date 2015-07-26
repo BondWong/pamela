@@ -375,7 +375,7 @@
 				self.editor.composer.commands.exec("insertImage", {
 					src : urlData,
 					title : url,
-					style : "max-width: 480px"
+					style : "max-width: 250px"
 				});
 			};
 
