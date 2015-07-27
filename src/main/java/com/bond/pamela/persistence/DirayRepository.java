@@ -10,16 +10,15 @@ import com.bond.pamela.persistence.result.ThumbnailResult;
 
 @Repository
 public interface DirayRepository extends GraphRepository<Diary> {
-	@Query("match (d: Diary) return collect(distinct d.mood)")
-	Moods fetchAllMoods();
+	@Query("start u=node({0}) match (d: Diary) -[:writtenBy]-> (u) return collect(distinct d.mood)")
+	Moods fetchAllMoods(Long userID);
 
-	@Query("match (d: Diary) return collect(d.images)")
-	ThumbnailResult fetchAllImages();
+	@Query("start u=node({0}) match (d: Diary) -[:writtenBy]-> (u) return collect(d.images)")
+	ThumbnailResult fetchAllImages(Long userID);
 
-	@Query("match (d: Diary) with d, count(d.images) as numberOfImagePerDiary return sum(numberOfImagePerDiary)")
-	Long countImages();
+	@Query("start u=node({0}) match (d: Diary) -[:writtenBy]->(u) with d, count(d.images) as numberOfImagePerDiary return sum(numberOfImagePerDiary)")
+	Long countImages(Long userID);
 
-	@Query("match (d: Diary) return d.mood order by d.id desc limit 1")
-	String getLatestMood();
+	@Query("start u=node({0}) match (d: Diary) -[:writtenBy]->(u) return d.mood order by d.id desc limit 1")
+	String getLatestMood(Long userID);
 }
-// 218.244.137.34

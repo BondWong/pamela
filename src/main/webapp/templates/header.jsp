@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.bond.pamela.utils.LoginHelper"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header class="header fixed-top clearfix">
 	<!--logo start-->
 	<div class="brand">
@@ -21,10 +21,9 @@
 					class="ico-palette2"></i></a></li>
 			<!-- user login dropdown start-->
 			<li class="dropdown"><a data-toggle="dropdown"
-				class="dropdown-toggle" href="#"> <img alt=""
-					src="images/<%=LoginHelper.getID(session.getId())%>.jpg"> <span
-					class="username"> <%=LoginHelper.getID(session.getId())%>
-				</span> <b class="caret"></b>
+				class="dropdown-toggle" href="#"> <img alt="avatar" src=""
+					id="header-user-avatar"> <span class="username"
+					id="header-user-name"> </span> <b class="caret"></b>
 			</a>
 				<ul class="dropdown-menu extended logout">
 					<li><a href="javascript:void(0)" id="logout_button"><i

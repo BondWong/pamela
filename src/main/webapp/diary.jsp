@@ -51,7 +51,7 @@
 	<script src="js/jquery.scrollTo.min.js"></script>
 	<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 	<script src="js/jquery.nicescroll.js"></script>
-	
+
 	<!--Theme Switcher-->
 	<script src="js/theme-switcher.js"></script>
 
@@ -118,9 +118,11 @@
 
 	<!--load diaries start-->
 	<script>
+		var user = JSON.parse(localStorage.getItem("user"));
 		$
 				.ajax({
-					url : "pamela/diary/0/500/${param.category}",
+					url : "pamela/diary/0/500/" + user["id"]
+							+ "/${param.category}",
 					type : "GET",
 					dataType : "json",
 					cache : true,

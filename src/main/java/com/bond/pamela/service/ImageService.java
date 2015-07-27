@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -28,12 +29,12 @@ public class ImageService {
 	@Autowired
 	DirayRepository repository;
 
-	@Path("/all")
+	@Path("/all/{userID: \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchAllImages() {
+	public Response fetchAllImages(@PathParam("userID") Long userID) {
 		try (Transaction tx = db.beginTx()) {
-			ThumbnailResult result = repository.fetchAllImages();
+			ThumbnailResult result = repository.fetchAllImages(userID);
 			List<String> thumbnailLinks = new ArrayList<>();
 			Pattern pattern = Pattern
 					.compile("\"link\":\"(thumbnail-.{1,30}-\\d{4}-\\d{2}-\\d{2}\\-[a-zA-Z]{1,10}-\\d{1,}.\\w{2,4})\"");
@@ -48,12 +49,12 @@ public class ImageService {
 		}
 	}
 
-	@Path("/count")
+	@Path("/count/{userID: \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response count() {
+	public Response count(@PathParam("userID") Long userID) {
 		try (Transaction tx = db.beginTx()) {
-			Long count = repository.countImages();
+			Long count = repository.countImages(userID);
 			return Response.ok(count).build();
 		}
 	}

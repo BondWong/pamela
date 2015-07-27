@@ -88,7 +88,7 @@
 
 	<script src="js/jquery.isotope.js"></script>
 	<script src="js/jquery.lighterbox.js"></script>
-	
+
 	<!--Theme Switcher-->
 	<script src="js/theme-switcher.js"></script>
 
@@ -116,9 +116,10 @@
 			});
 		});
 
+		var user = JSON.parse(localStorage.getItem("user"));
 		$
 				.ajax({
-					url : "pamela/mood/all",
+					url : "pamela/mood/all/" + user["id"],
 					type : "GET",
 					dataType : "json",
 					cache : true,
@@ -144,7 +145,7 @@
 
 		if (sessionStorage.getItem("thumbnailLinks") == null) {
 			$.ajax({
-				url : "pamela/image/all",
+				url : "pamela/image/all" + user["id"],
 				type : "GET",
 				dataType : "json",
 				cache : true,

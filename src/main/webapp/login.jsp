@@ -118,7 +118,11 @@
 				async : false,
 				success : function(data, textStatus, jqXHR) {
 					// success message
-					window.location.href = data;
+					var originalURL = data["originalURL"];
+					delete data["originalURL"];
+					delete data["password"];
+					localStorage.setItem("user", JSON.stringify(data));
+					window.location.href = originalURL;
 				},
 				error : function(jqXHR, textStatus, error) {
 					// fail message

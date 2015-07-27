@@ -293,9 +293,10 @@
 			} else if (data.html == "") {
 				warn_content();
 			} else {
+				var user = JSON.parse(localStorage.getItem("user"));
 
 				$.ajax({
-					url : "pamela/diary/create",
+					url : "pamela/diary/create/" + user["id"],
 					type : "POST",
 					data : JSON.stringify(data),
 					contentType : "application/json",
@@ -306,7 +307,7 @@
 						// success message
 						$("#create_diary_success").modal();
 					},
-					error : function() {
+					error : function(jqXHR, textStatus, error) {
 						// fail message
 						$("#create_diary_fail").modal();
 					}

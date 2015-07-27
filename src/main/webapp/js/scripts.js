@@ -1,11 +1,19 @@
 (function($) {
 	"use strict";
 
+	// add avatar and name start
+
+	var user = JSON.parse(localStorage.getItem("user"));
+	$("#header-user-name").append(user["name"]);
+	$("#header-user-avatar").attr("src", "images/" + user["name"] + ".jpg");
+
+	// add avatar and name end
+
 	// fetch category start
 
 	$
 			.ajax({
-				url : "pamela/mood/all",
+				url : "pamela/mood/all/" + user["id"],
 				type : "GET",
 				dataType : "json",
 				cache : true,

@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginHelper {
-	private static Map<String, String> userIDs = new HashMap<>();
+	private static Map<String, Long> userIDs = new HashMap<>();
 
-	public static synchronized void addID(String sessionID, String ID) {
+	public static synchronized void addID(String sessionID, Long ID) {
 		userIDs.put(sessionID, ID);
 	}
 
@@ -18,7 +18,13 @@ public class LoginHelper {
 		return userIDs.containsKey(sessionID) && userIDs.get(sessionID) != null;
 	}
 
-	public static String getID(String sessionID) {
+	public static Long getID(String sessionID) {
 		return userIDs.get(sessionID);
 	}
+
+	// for JSP page
+	public static String getIDStr(String sessionID) {
+		return userIDs.get(sessionID) + "";
+	}
+
 }

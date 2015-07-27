@@ -11,10 +11,13 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
@@ -57,12 +60,16 @@ public class AccountService {
 			repository.save(users);
 			tx.success();
 			return Response.ok().build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
 	}
 
 	@Path("/login")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(Map<String, Object> parameters,
 			@Context HttpServletRequest request) {
 		try (Transaction tx = db.beginTx()) {
@@ -72,25 +79,29 @@ public class AccountService {
 			User user = result.singleOrNull();
 			if (user != null) {
 				HttpSession session = request.getSession();
-				LoginHelper.addID(session.getId(),
-						(String) parameters.get("name"));
+				LoginHelper.addID(session.getId(), user.getId());
 				boolean remember_me = (boolean) parameters.get("remember-me");
+
+				Map<String, Object> results = user.toRep();
+				results.put("originalURL", OriginalURLSaver.getInstance()
+						.getURL(session.getId()));
+				ResponseBuilder builder = Response
+						.ok(new GenericEntity<Map<String, Object>>(results) {
+						});
 				if (remember_me) {
 					// save PPAL
-					AutoLoginHelper.put(session.getId(),
-							(String) parameters.get("name"));
-					return Response
-							.ok(OriginalURLSaver.getInstance().getURL(
-									session.getId()))
-							.cookie(new NewCookie("PPAL", session.getId(), "/",
-									null, null, 60 * 60 * 24 * 30, false, true))
-							.build();
+					AutoLoginHelper.put(session.getId(), user.getId());
+					builder = builder.cookie(new NewCookie("PPAL", session
+							.getId(), "/", null, null, 60 * 60 * 24 * 30,
+							false, true));
 				}
-				return Response.ok(
-						OriginalURLSaver.getInstance().getURL(session.getId()))
-						.build();
+
+				return builder.build();
 			}
 			return Response.status(401).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
 	}
 

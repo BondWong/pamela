@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -34,12 +35,12 @@ public class MoodService {
 	@Autowired
 	DirayRepository repository;
 
-	@Path("/all")
+	@Path("/all/{userID: \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchAllMoods() {
+	public Response fetchAllMoods(@PathParam("userID") Long id) {
 		try (Transaction tx = db.beginTx()) {
-			Moods moods = repository.fetchAllMoods();
+			Moods moods = repository.fetchAllMoods(id);
 			Iterable<String> results = moods.getMoods();
 			List<String> resultsList = Lists.newArrayList(results);
 			return Response.ok(new GenericEntity<List<String>>(resultsList) {
@@ -47,26 +48,29 @@ public class MoodService {
 		}
 	}
 
-	@Path("/latest")
+	@Path("/latest/{userID: \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getLatestMood() {
+	public Response getLatestMood(@PathParam("userID") Long id) {
 		try (Transaction tx = db.beginTx()) {
-			String mood = repository.getLatestMood();
+			String mood = repository.getLatestMood(id);
 			return Response.ok(JsonHelper.toJson(mood)).build();
 		}
 	}
 
-	@Path("/statistic")
+	@Path("/statistic/{userID: \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchMoodStatistic(@BeanParam MoodParamBean moodParamBean) {
+	public Response fetchMoodStatistic(@BeanParam MoodParamBean moodParamBean,
+			@PathParam("userID") Long userID) {
 		ExecutionEngine engine = new ExecutionEngine(db);
-		String query = "match (d: Diary) return \"all\" as type, count(d.mood) as count";
+		String query = "start n=node("
+				+ userID
+				+ ") match (d: Diary) -[:writtenBy]-> (n) return \"all\" as type, count(d.mood) as count";
 		for (String mood : moodParamBean.getMoods()) {
 			query += " union all match (" + mood + ":Diary {mood: \"" + mood
-					+ "\"}) return \"" + mood + "\" as type" + ", count("
-					+ mood + ".mood) as count";
+					+ "\"}) -[:writtenBy]-> n return \"" + mood
+					+ "\" as type" + ", count(" + mood + ".mood) as count";
 		}
 		ResourceIterator<Map<String, Object>> resourceIterator = engine
 				.execute(query).iterator();

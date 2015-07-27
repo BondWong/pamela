@@ -368,8 +368,9 @@
 	<!--script for this page-->
 
 	<script>
+		var user = JSON.parse(localStorage.getItem("user"));
 		$.ajax({
-			url : "pamela/mood/latest",
+			url : "pamela/mood/latest/" + user["id"],
 			type : "GET",
 			dataType : "json",
 			cache : true,
