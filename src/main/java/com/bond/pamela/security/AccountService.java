@@ -53,11 +53,14 @@ public class AccountService {
 			parameters.put("password", "1226");
 			User bond = (User) UserFactory.getInstance().create(parameters);
 
+			bond.setLover(pam);
+			pam.setLover(bond);
+
 			List<User> users = new ArrayList<>();
 			users.add(pam);
 			users.add(bond);
 
-			repository.save(users);
+			repository.save(users);			
 			tx.success();
 			return Response.ok().build();
 		} catch (Exception e) {

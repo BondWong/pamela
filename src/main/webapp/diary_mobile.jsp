@@ -24,7 +24,7 @@
 				<div class="col-md-12">
 					<section class="panel">
 						<header class="panel-heading wht-bg">
-							<h4 class="gen-case">View Bond's Diary</h4>
+							<h4 class="gen-case">View Your Loved One's Diary</h4>
 						</header>
 						<div class="panel-body ">
 

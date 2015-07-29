@@ -145,7 +145,7 @@
 
 		if (sessionStorage.getItem("thumbnailLinks") == null) {
 			$.ajax({
-				url : "pamela/image/all" + user["id"],
+				url : "pamela/image/all/" + user["id"],
 				type : "GET",
 				dataType : "json",
 				cache : true,
