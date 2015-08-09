@@ -14,13 +14,13 @@ import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.codec.binary.Base64;
+
 import net.coobird.thumbnailator.Thumbnails;
 
 import com.bond.pamela.domain.Diary;
 import com.bond.pamela.domain.valueObject.Image;
 import com.bond.pamela.utils.RootPathUtil;
-import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 public class DiaryFactory implements DomainFactory {
 	private DiaryFactory() {
@@ -60,7 +60,7 @@ public class DiaryFactory implements DomainFactory {
 						encoddedData.indexOf("data:image/")
 								+ "data:image/".length(),
 						encoddedData.indexOf(";base64"));
-				byte data[] = Base64.decode(encoddedData.substring(encoddedData
+				byte data[] = Base64.decodeBase64(encoddedData.substring(encoddedData
 						.indexOf("base64,") + "base64,".length()));
 				BufferedImage bufferedImage = ImageIO
 						.read(new ByteArrayInputStream(data));
@@ -125,7 +125,7 @@ public class DiaryFactory implements DomainFactory {
 				images.add(thumbnailImage);
 				count++;
 
-			} catch (Base64DecodingException | IOException e) {
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

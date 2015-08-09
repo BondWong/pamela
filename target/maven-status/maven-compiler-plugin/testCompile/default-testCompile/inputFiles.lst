@@ -1,5 +1,8 @@
-/Users/bondwong/Documents/workspace/pamela/src/test/java/domainTest/DomainEqualityTest.java
-/Users/bondwong/Documents/workspace/pamela/src/test/java/domainTest/ImageConvertionTest.java
-/Users/bondwong/Documents/workspace/pamela/src/test/java/transactionTest/CreateDiaryTransactionTest.java
-/Users/bondwong/Documents/workspace/pamela/src/test/java/domainTest/DomainAnnotationTest.java
-/Users/bondwong/Documents/workspace/pamela/src/test/java/repositoryTest/DiaryRepositoryTest.java
+/Users/bondwong/git/pamela/src/test/java/regexTest/ImgLinkPatternTest.java
+/Users/bondwong/git/pamela/src/test/java/repositoryTest/UserRepositoryTest.java
+/Users/bondwong/git/pamela/src/test/java/domainTest/DomainAnnotationTest.java
+/Users/bondwong/git/pamela/src/test/java/domainTest/ImageConvertionTest.java
+/Users/bondwong/git/pamela/src/test/java/domainTest/DomainEqualityTest.java
+/Users/bondwong/git/pamela/src/test/java/regexTest/ImgDateURLPatternTest.java
+/Users/bondwong/git/pamela/src/test/java/domainTest/AspectTest.java
+/Users/bondwong/git/pamela/src/test/java/repositoryTest/DiaryRepositoryTest.java

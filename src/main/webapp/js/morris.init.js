@@ -105,14 +105,14 @@ var user = JSON.parse(localStorage["user"]);
 var moodStatisticData = [];
 var moods = [];
 $.ajax({
-	url : "pamela/mood/all/" + user["id"],
+	url : "pamela/mood/all/" + user["lover"]["id"],
 	type : "GET",
 	dataType : "json",
 	cache : true,
 	async : false,
 	success : function(data, textStatus, jqXHR) {
 		// success message
-		var url = "pamela/mood/statistic/" + user["id"] + "?";
+		var url = "pamela/mood/statistic/" + user["lover"]["id"] + "?";
 		moods = data;
 		$(data).each(function(index, element) {
 			if (index != data.length - 1)
